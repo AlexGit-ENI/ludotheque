@@ -1,9 +1,6 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,10 +13,17 @@ public class Client {
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+@Column(name = "no_client")
+
+    private int noClient;
+
 
 @NonNull
     private String nom;
 @NonNull
     private String prenom;
+@NonNull
+    private String email;
+@NonNull
+    private String telephone;
 }
