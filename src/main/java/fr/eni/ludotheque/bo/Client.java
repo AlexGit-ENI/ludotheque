@@ -1,5 +1,6 @@
 package fr.eni.ludotheque.bo;
 
+import fr.eni.ludotheque.dal.ClientRepository;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Table(name="ClientOTM")
 
 public class Client {
 
@@ -26,4 +28,12 @@ public class Client {
     private String email;
 @NonNull
     private String telephone;
+
+//    public void addAdresse(Adresse a) {adresses.add(a);}
+
+@Override
+    public String toString() {
+    return noClient + " " + nom + " " + prenom + " " + email + " " + telephone;
+
+    }
 }
