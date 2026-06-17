@@ -14,7 +14,7 @@ public class Adresse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int no_adresse;
 
     @NonNull
     private String rue;
@@ -23,5 +23,9 @@ public class Adresse {
     @NonNull
     private String ville;
 
+    @Override
+    public String toString() {
+        return no_adresse + " " + rue + " " + code_postal + " " + ville+ " ";
+    }
 
 }

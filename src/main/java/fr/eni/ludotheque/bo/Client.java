@@ -13,20 +13,18 @@ import lombok.*;
 
 public class Client {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name = "no_client")
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int noClient;
 
 
-@NonNull
+    @NonNull
     private String nom;
-@NonNull
+    @NonNull
     private String prenom;
-@NonNull
+    @NonNull
     private String email;
-@NonNull
+    @NonNull
     private String telephone;
 
 //    public void addAdresse(Adresse a) {adresses.add(a);}
