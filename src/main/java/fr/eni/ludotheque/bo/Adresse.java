@@ -3,29 +3,25 @@ package fr.eni.ludotheque.bo;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name="AdresseOTM")
-
+@Entity
+@Table(name="ADRESSES")
 public class Adresse {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int no_adresse;
+    @EqualsAndHashCode.Exclude
+    private Integer noAdresse;
 
-    @NonNull
-    private String rue;
-    @NonNull
-    private String code_postal;
-    @NonNull
-    private String ville;
+    @Column(length = 100, nullable = false)
+    @NonNull private String rue;
 
-    @Override
-    public String toString() {
-        return no_adresse + " " + rue + " " + code_postal + " " + ville+ " ";
-    }
+    @Column(length = 5, nullable = false)
+    @NonNull private String codePostal;
+
+    @Column(length = 100, nullable = false)
+    @NonNull private String ville;
+
 
 }
