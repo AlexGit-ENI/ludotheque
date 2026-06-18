@@ -10,7 +10,7 @@ public class ClientTest {
     @DisplayName("test de creation client - cas droit")
     //Test JUnit
     public void testCreationClient() {
-        Adresse adresse = new Adresse("rue du paradis", "066666", "Saint Herblain");
+        Adresse adresse = new Adresse("rue du paradis", "06666", "Cieux");
         Client client = new Client("Jesus", "Christ", "jesus.christ@cieux.com", adresse);
         client.setNoTelephone("0666666666");
         Assertions.assertNotNull(client);

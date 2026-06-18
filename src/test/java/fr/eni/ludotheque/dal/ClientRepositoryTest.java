@@ -21,9 +21,9 @@ public class ClientRepositoryTest {
     @Transactional
     public void testCreationClient() {
         //Arrange
-        Adresse adresse = new Adresse("rue des Cormorans", "44800", "Saint Herblain");
-        Client client = new Client("Stiller", "Ben", "ben.stiller@eni.fr", adresse);
-        client.setNoTelephone("0101010101");
+        Adresse adresse = new Adresse("rue du paradis", "06666", "Cieux");
+        Client client = new Client("Jesus", "Christ", "jesus.christ@cieux.com", adresse);
+        client.setNoTelephone("0666666666");
 
         //Act
         clientRepository.save(client);
@@ -32,10 +32,10 @@ public class ClientRepositoryTest {
         Client clientEnBD = clientRepository.findById(client.getNoClient()).orElse(null);
         assertNotNull(clientEnBD);
         assertNotNull(clientEnBD.getNoClient());
-        assertEquals("Stiller", clientEnBD.getNom());
-        assertEquals("Ben", clientEnBD.getPrenom());
-        assertEquals("ben.stiller@eni.fr", clientEnBD.getEmail());
-        assertEquals("0101010101", clientEnBD.getNoTelephone());
+        assertEquals("Jesus", clientEnBD.getNom());
+        assertEquals("Christ", clientEnBD.getPrenom());
+        assertEquals("jesus.christ@cieux.com", clientEnBD.getEmail());
+        assertEquals("0666666666", clientEnBD.getNoTelephone());
         assertNotNull(clientEnBD.getAdresse().getNoAdresse());
         assertEquals(adresse, clientEnBD.getAdresse());
     }
