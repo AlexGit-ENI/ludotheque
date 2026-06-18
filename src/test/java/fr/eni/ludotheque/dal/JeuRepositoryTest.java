@@ -20,9 +20,9 @@ public class JeuRepositoryTest {
     //@Transactional
     public void testCreationJeu() {
         //Arrange
-        Jeu jeu = new Jeu("SkyJo", "refSkyJo", 5.6f );
+        Jeu jeu = new Jeu("Jumanji", "refJumanji", 5.6f );
         jeu.setAgeMin(8);
-        jeu.setDescription("Descr skyjo");
+        jeu.setDescription("Descr Jumanji");
         jeu.addGenre(new Genre(1, ""));
         jeu.addGenre(new Genre(2, ""));
 
