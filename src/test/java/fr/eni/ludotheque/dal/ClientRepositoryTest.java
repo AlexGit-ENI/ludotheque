@@ -1,5 +1,6 @@
 package fr.eni.ludotheque.dal;
 
+import fr.eni.ludotheque.bll.ClientService;
 import fr.eni.ludotheque.bo.Adresse;
 import fr.eni.ludotheque.bo.Client;
 import jakarta.transaction.Transactional;
@@ -7,12 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -20,12 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ClientRepositoryTest {
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private ClientService clientService;
 
     @Test
     @DisplayName("test positif de creation d'un client en BD")
     @Transactional
     public void testCreationClient() {
-        //Arrange
+
         Adresse adresse = new Adresse("rue du paradis", "06666", "Cieux");
         Client client = new Client("Jesus", "Christ", "jesus.christ@cieux.com", adresse);
         client.setNoTelephone("0666666666");
@@ -48,15 +46,29 @@ public class ClientRepositoryTest {
         assertNotNull(findById);
         assertEquals(clientEnBD, findById);
 
-        List<Client> findByOrderByNom();
-
-        @Query("select c FROM Client WHERE c.nom = Jesus")
-        Client findByNom((@Param("Jesus")String nom);
+    }
+    @Test
+    void testFindClientByNom() {
+        List<Client> clients = clientService.findClientByNom("Jes");
+//        assertNotNull(clients);
+//        assertEquals(2, clients.size());
 
     }
-//    public interface ClientRepository extends JpaRepository<Client, Integer> {
-//        List<Client> findByNom(String nom);
-//        Client findByNomWithJPQL(@Param("nom") String nom);
+
+
+
+
+
+//    //Recherche par Nom - Nom Commence par - Civilite :
+//    @Query("select c from Client c where c.nom = ?Jesus")
+//    List<Client> trouverPersonnesParNom(String nom) {
+//        return trouverPersonnesParNom(nom);
+//    }
+//    @NamedQuery(name="Personne.findNom",  query="SELECT c FROM Client c");
+//    @NamedQuery(name="Personne.findNomCommencePar", query="SELECT c from Client c where c.nom like:Jes")
+//    @NamedQuery(name="Personne.findMessieurs", query="SELECT c FROM Client c whee c.civilite = 'M'")
+
+
 
 }
 
