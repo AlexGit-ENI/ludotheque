@@ -9,4 +9,7 @@ public interface ClientService {
     void ajouterClient(Client client);
 
     List<Client> findClientByNom(String nom);
+
+    Client updateClient(Client client);
+
 }

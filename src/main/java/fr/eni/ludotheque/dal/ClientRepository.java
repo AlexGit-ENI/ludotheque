@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client, Integer> {
     List<Client> findClientByNom(String nom);
+    List<Client> updateClient(String adresse, Client client);
 }
