@@ -98,6 +98,8 @@ public class ClientRepositoryTest {
                     exception.getMessage()
             );
         }
+
+
 }
 
 
