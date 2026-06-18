@@ -98,32 +98,8 @@ public class ClientRepositoryTest {
                     exception.getMessage()
             );
         }
-
-
 }
 
-
-
-
-
-
-        //        assertNotNull(clients);
-//        assertEquals(2, clients.size());
-
-//    //Recherche par Nom - Nom Commence par - Civilite :
-//    @Query("select c from Client c where c.nom = ?Jesus")
-//    List<Client> trouverPersonnesParNom(String nom) {
-//        return trouverPersonnesParNom(nom);
-//    }
-//    @NamedQuery(name="Personne.findNom",  query="SELECT c FROM Client c");
-//    @NamedQuery(name="Personne.findNomCommencePar", query="SELECT c from Client c where c.nom like:Jes")
-//    @NamedQuery(name="Personne.findMessieurs", query="SELECT c FROM Client c whee c.civilite = 'M'")
-
-
-//    @Test
-//    @Transactional
-//    void testFindClientByNom() {
-//        List<Client> clients = clientService.findClientByNom("Jes");
 
 
 

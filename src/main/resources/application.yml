@@ -3,6 +3,8 @@
 #                                    LUDO_DB
 
 spring:
+  profiles:
+    active: "mock"
   application:
     name: premierProjet
   #Connection to DB
