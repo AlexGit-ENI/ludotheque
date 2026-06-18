@@ -1,5 +1,6 @@
-package fr.eni.ludotheque.bll;
+package fr.eni.ludotheque.bll.impl;
 
+import fr.eni.ludotheque.bll.ClientService;
 import fr.eni.ludotheque.bo.Adresse;
 import fr.eni.ludotheque.bo.Client;
 import fr.eni.ludotheque.dal.ClientRepository;
@@ -48,17 +49,14 @@ public class ClientServiceImpl implements ClientService {
    @Override
         public Client updateAdresse(int noClient, Adresse nouvelleAdresse) {
 
-       Optional<Client> client = clientRepository.findById(noClient);
-       client.orElseThrow(() -> new RuntimeException("Client non trouvé"));
-
-       client.get().setAdresse(nouvelleAdresse);
-       return clientRepository.save(client.get());
-
-            Client.setAdresse(nouvelleAdresse);
-            clientRepository.save(client);
-
-
-        }
+       Client client = clientRepository.findById(noClient).orElseThrow(() -> new RuntimeException("Client non trouvé"));;
+       client.setAdresse(nouvelleAdresse);
+       clientRepository.save(client);
+       return client;
+    }
 
 }
+
+
+//Créer un package exepetion
 
