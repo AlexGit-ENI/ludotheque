@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-    @SpringBootTest
+import java.util.Optional;
+
+@SpringBootTest
     public class ClientServiceImplTest {
         @Autowired
         ClientService clientService;
@@ -24,9 +26,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
             clientService.ajouterClient(client);
 
+            //Optional
+//            Optional<Client> clientOptional = clientRepository.findById(client.getNoClient());
             Client clientBD = clientRepository.findById(client.getNoClient()).orElse(null);
             Assertions.assertNotNull(clientBD);
             Assertions.assertEquals(client,  clientBD);
+
 
 
         }
