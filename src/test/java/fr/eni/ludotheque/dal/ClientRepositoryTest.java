@@ -7,6 +7,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -38,6 +43,25 @@ public class ClientRepositoryTest {
         assertEquals("0666666666", clientEnBD.getNoTelephone());
         assertNotNull(clientEnBD.getAdresse().getNoAdresse());
         assertEquals(adresse, clientEnBD.getAdresse());
+
+        Client findById = clientRepository.findById(clientEnBD.getNoClient()).orElse(null);
+        assertNotNull(findById);
+        assertEquals(clientEnBD, findById);
+
+        List<Client> findByOrderByNom();
+
+        @Query("select c FROM Client WHERE c.nom = Jesus")
+        Client findByNom((@Param("Jesus")String nom);
+
     }
+//    public interface ClientRepository extends JpaRepository<Client, Integer> {
+//        List<Client> findByNom(String nom);
+//        Client findByNomWithJPQL(@Param("nom") String nom);
 
 }
+
+
+
+
+
+
