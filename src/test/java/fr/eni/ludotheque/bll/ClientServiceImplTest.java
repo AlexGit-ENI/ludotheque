@@ -18,15 +18,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
         @Test
         void testCreationClient() {
-            //Arrange (Préparation du test)
-            Adresse adresse = new Adresse("rue des Cormorans", "44800", "Saint Herblain");
-            Client client = new Client("Stiller", "Ben", "ben.stiller@eni.fr", adresse);
-            client.setNoTelephone("0101010101");
+            Adresse adresse = new Adresse("rue du paradis", "06666", "Cieux");
+            Client client = new Client("Jesus", "Christ", "christ.jesus@cieux.com", adresse);
+            client.setNoTelephone("06666666");
 
-            //Act (Appel de la méthode à vérifier)
             clientService.ajouterClient(client);
 
-            //Assert (vérifications)
             Client clientBD = clientRepository.findById(client.getNoClient()).orElse(null);
             Assertions.assertNotNull(clientBD);
             Assertions.assertEquals(client,  clientBD);
