@@ -2,15 +2,22 @@ package fr.eni.ludotheque.dal;
 
 import fr.eni.ludotheque.bo.Genre;
 import fr.eni.ludotheque.bo.Jeu;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 public class JeuRepositoryTest {
+
+
+    @Autowired
+    private GenreRepository genreRepository;
 
     @Autowired
     private JeuRepository jeuRepository;
@@ -20,25 +27,29 @@ public class JeuRepositoryTest {
     //@Transactional
     public void testCreationJeu() {
         //Arrange
-        Jeu jeu = new Jeu("Jumanji", "refJumanji", 5.6f );
+        Jeu jeu = new Jeu("Jumanji", "REF666", 0.0f );
         jeu.setAgeMin(8);
         jeu.setDescription("Descr Jumanji");
-        jeu.addGenre(new Genre(1, ""));
-        jeu.addGenre(new Genre(2, ""));
+        jeu.addGenre(new Genre(1, "Jeu de Plateau"));
+        jeu.addGenre(new Genre(2, "Jeu d''Ambiance"));
+        jeu.addGenre(new Genre(3, "Jeu Coop"));
 
         //Act
-        Jeu jeuActual = jeuRepository.save(jeu);
+        Jeu jeuActuel = jeuRepository.save(jeu);
 
         //Assert
-        Jeu jeuBD = jeuRepository.findById(jeuActual.getNoJeu()).orElse(null);
+        Jeu jeuBD = jeuRepository.findById(jeuActuel.getNoJeu()).orElse(null);
         assertThat(jeuBD).isNotNull();
         assertThat(jeuBD.getNoJeu()).isNotNull();
         assertThat(jeuBD.getTitre()).isEqualTo(jeu.getTitre());
         assertThat(jeuBD.getDescription()).isEqualTo(jeu.getDescription());
         assertThat(jeuBD.getAgeMin()).isEqualTo(jeu.getAgeMin());
-        assertThat(jeuBD.getGenres()).hasSize(2);
+        assertThat(jeuBD.getGenres()).hasSize(3);
         assertThat(jeuBD.getReference()).isEqualTo(jeu.getReference());
+
+        }
 
     }
 
-}
+
+

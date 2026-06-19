@@ -6,4 +6,5 @@ import fr.eni.ludotheque.bo.Genre;
 
 public interface GenreRepository extends JpaRepository<Genre, Integer>{
 
+
 }
