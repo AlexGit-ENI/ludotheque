@@ -16,10 +16,8 @@ public class JeuServiceImpl implements JeuService {
 
     @Override
     public Jeu ajouterJeu(Jeu jeu) {
-        return jeu;
+        return jeuRepository.save(jeu);
     }
 
     private final JeuRepository jeuRepository;
-
-//    private finale GenreRepository genreRepository;
 }

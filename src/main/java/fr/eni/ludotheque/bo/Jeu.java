@@ -37,7 +37,7 @@ public class Jeu {
     @NonNull
     private Float tarifJour;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "JEUX_GENRES",
             joinColumns = @JoinColumn(name="no_jeu"),
             inverseJoinColumns = @JoinColumn(name="no_genre"))
