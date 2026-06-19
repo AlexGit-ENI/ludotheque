@@ -36,7 +36,7 @@ public class Client {
     private String noTelephone;
 
     @NonNull
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE ,CascadeType.REMOVE},
             orphanRemoval = true, optional = false,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "no_adresse")
