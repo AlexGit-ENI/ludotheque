@@ -14,5 +14,4 @@ public interface ClientService {
     Client updateClient(Client client);
 
     Client updateAdresse(int noClient, Adresse adresse);
-
 }

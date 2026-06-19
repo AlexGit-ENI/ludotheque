@@ -4,19 +4,16 @@ import fr.eni.ludotheque.bll.ClientService;
 import fr.eni.ludotheque.bo.Adresse;
 import fr.eni.ludotheque.bo.Client;
 import fr.eni.ludotheque.dal.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
 
-    @Autowired
-    public  ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 
@@ -27,8 +24,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> findClientByNom(String nom) {
-        return null;
-
+        return clientRepository.findByNom(nom);
     }
 
     @Override
@@ -46,17 +42,14 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.save(clientExistant);
     }
 
-   @Override
-        public Client updateAdresse(int noClient, Adresse nouvelleAdresse) {
+    @Override
+    public Client updateAdresse(int noClient, Adresse adresse) {
 
-       Client client = clientRepository.findById(noClient).orElseThrow(() -> new RuntimeException("Client non trouvé"));;
-       client.setAdresse(nouvelleAdresse);
-       clientRepository.save(client);
-       return client;
+        Client client = clientRepository.findById(noClient)
+                .orElseThrow(() -> new RuntimeException("Client non trouvé"));
+
+        client.setAdresse(adresse);
+
+        return clientRepository.save(client);
     }
-
 }
-
-
-//Créer un package exepetion
-

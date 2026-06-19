@@ -5,63 +5,97 @@ import fr.eni.ludotheque.bo.Client;
 import fr.eni.ludotheque.dal.ClientRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
-
 @SpringBootTest
-    public class ClientServiceImplTest {
-        @Autowired
-        ClientService clientService;
+public class ClientServiceImplTest {
 
-        @Autowired
-        ClientRepository clientRepository;
+    @Autowired
+    private ClientService clientService;
 
-        @Test
-        void testCreationClient() {
-            Adresse adresse = new Adresse("rue du paradis", "06666", "Cieux");
-            Client client = new Client("Jesus", "Christ", "christ.jesus@cieux.com", adresse);
-            client.setNoTelephone("06666666");
+    @Autowired
+    private ClientRepository clientRepository;
 
-            clientService.ajouterClient(client);
+    @Test
+    void testCreationClient() {
 
-            //Optional
-//            Optional<Client> clientOptional = clientRepository.findById(client.getNoClient());
-            Client clientBD = clientRepository.findById(client.getNoClient()).orElse(null);
-            Assertions.assertNotNull(clientBD);
-            Assertions.assertEquals(client,  clientBD);
-        }
+        Adresse adresse =
+                new Adresse("rue du paradis", "06666", "Cieux");
 
-        @Test
-        void testModificationAdresse() {
-            ClientRepository clientRepository = Mockito.mock(ClientRepository.class);
+        Client client =
+                new Client("Jesus", "Christ",
+                        "christ.jesus@cieux.com",
+                        adresse);
 
-            Adresse ancienne = new Adresse("rue du pinard", "01234", "Bordeaux");
-                Client client = new Client("Pokora","Matt", "matt.po@mail.com", ancienne );
-                client.setNoTelephone("01234");
-                clientService.ajouterClient(client);
-                Client clientBD = clientRepository.findById(client.getNoClient()).orElse(null);
-                Assertions.assertNotNull(clientBD);
-                Assertions.assertEquals(client,  clientBD);
-        }
+        client.setNoTelephone("06666666");
 
-        @Test
-        void testModificationAdresseNULL() {
-            ClientRepository clientRepository = Mockito.mock(ClientRepository.class);
+        clientService.ajouterClient(client);
 
-            Adresse ancienne = new Adresse("rue du X", "43210", null);
-            Client client = new Client("Doe", "John", "john.doe@mail.com", ancienne );
-            client.setNoTelephone("43210");
-            clientService.ajouterClient(client);
-            Client clientBD = clientRepository.findById(client.getNoClient()).orElse(null);
-            Assertions.assertNotNull(clientBD);
-            Assertions.assertEquals(client,  clientBD);
+        Client clientBD =
+                clientRepository.findById(client.getNoClient())
+                        .orElse(null);
 
-
-        }
-
+        Assertions.assertNotNull(clientBD);
+        Assertions.assertEquals("Jesus", clientBD.getNom());
+        Assertions.assertEquals("Christ", clientBD.getPrenom());
     }
 
+    @Test
+    void testModificationAdresse() {
+
+        Adresse ancienne =
+                new Adresse("rue du pinard",
+                        "01234",
+                        "Bordeaux");
+
+        Client client =
+                new Client("Pokora",
+                        "Matt",
+                        "matt.po@mail.com",
+                        ancienne);
+
+        client.setNoTelephone("01234");
+
+        clientService.ajouterClient(client);
+
+        Adresse nouvelleAdresse =
+                new Adresse("Rue du Soleil",
+                        "75000",
+                        "Paris");
+
+        clientService.updateAdresse(
+                client.getNoClient(),
+                nouvelleAdresse);
+
+        Client clientBD =
+                clientRepository.findById(client.getNoClient())
+                        .orElse(null);
+
+        Assertions.assertNotNull(clientBD);
+
+        Assertions.assertEquals(
+                "Rue du Soleil",
+                clientBD.getAdresse().getRue());
+    }
+
+    @Test
+    void testModificationAdresseClientInexistant() {
+
+        Adresse adresse =
+                new Adresse("Rue X",
+                        "00000",
+                        "Ville X");
+
+        RuntimeException exception =
+                Assertions.assertThrows(
+                        RuntimeException.class,
+                        () -> clientService.updateAdresse(
+                                999999,
+                                adresse));
+
+        Assertions.assertEquals(
+                "Client non trouvé",
+                exception.getMessage());
+    }
+}
