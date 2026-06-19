@@ -1,6 +1,8 @@
 package fr.eni.ludotheque.bll;
 
+import fr.eni.ludotheque.bo.Jeu;
+
 public interface JeuService {
 
-    void ajouterUnGenre (JeuService jeuService);
+    Jeu ajouterJeu (Jeu jeu);
 }
