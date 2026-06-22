@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/clients")
 public class ClientRestController {
@@ -59,5 +62,18 @@ public class ClientRestController {
         } catch (ClientNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+    // Recherche un todo par chaine de caractère (nom)
+    @GetMapping("/search")
+    public ResponseEntity<List<Client>> findClientByNom(
+            @RequestParam String nom) {
+
+        List<Client> clients = clientService.findClientByNom(nom);
+
+        if (clients.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(clients);
     }
 }
