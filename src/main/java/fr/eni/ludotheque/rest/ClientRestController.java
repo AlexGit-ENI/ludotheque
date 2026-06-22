@@ -24,7 +24,7 @@ public class ClientRestController {
         clientService.ajouterClient(client);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/client")
     public ResponseEntity<String> deleteClient(@PathVariable Integer id) {
         try {
             ClientService.deleteClient(id);
@@ -35,14 +35,26 @@ public class ClientRestController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/client")
     public ResponseEntity<Client> updateClient(
             @PathVariable Integer id,
             @Valid @RequestBody Client client) {
-
         try {
             client.setNoClient(id);
             Client updatedClient = clientService.updateClient(client);
+            return ResponseEntity.ok(updatedClient);
+        } catch (ClientNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    //Modification partiel d'une information : Adresse
+    @PatchMapping("/{id}/adresse")
+    public ResponseEntity<Client> updateClientAdresse(
+            @PathVariable Integer id,
+            @RequestBody Client client) {
+        try {
+            Client updatedClient =
+                    clientService.updateAdresse(id, client.getAdresse());
             return ResponseEntity.ok(updatedClient);
         } catch (ClientNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
