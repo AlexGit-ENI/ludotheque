@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface ClientService {
 
+    static void deleteClient(Integer id) {
+    }
+
     void ajouterClient(Client client);
 
     List<Client> findClientByNom(String nom);
