@@ -1,6 +1,6 @@
 package fr.eni.ludotheque.rest;
 
-import fr.eni.ludotheque.Exeption.ClientNotFoundException;
+import fr.eni.ludotheque.Exceptions.ClientNotFoundException;
 import fr.eni.ludotheque.bll.ClientService;
 import fr.eni.ludotheque.bo.Client;
 import jakarta.validation.Valid;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/clients")
