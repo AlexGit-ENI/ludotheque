@@ -1,4 +1,4 @@
-package fr.eni.ludotheque.Exeption;
+package fr.eni.ludotheque.Exceptions;
 
 import lombok.Data;
 import lombok.NonNull;
