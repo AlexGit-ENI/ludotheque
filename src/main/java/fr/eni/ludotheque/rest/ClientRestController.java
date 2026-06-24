@@ -3,6 +3,7 @@ package fr.eni.ludotheque.rest;
 import fr.eni.ludotheque.Exceptions.ClientNotFoundException;
 import fr.eni.ludotheque.bll.ClientService;
 import fr.eni.ludotheque.bo.Client;
+import fr.eni.ludotheque.dto.AdresseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,10 +54,12 @@ public class ClientRestController {
     @PatchMapping("/{id}/adresse")
     public ResponseEntity<Client> updateClientAdresse(
             @PathVariable Integer id,
-            @RequestBody Client client) {
+            @RequestBody AdresseDTO  adresseDTO) {
         try {
             Client updatedClient =
-                    clientService.updateAdresse(id, client.getAdresse());
+                    clientService.updateAdresse(id, adresseDTO.getRue());
+                    clientService.updateAdresse(id, adresseDTO.getVille());
+                    clientService.updateAdresse(id, adresseDTO.getCodePostal());
             return ResponseEntity.ok(updatedClient);
         } catch (ClientNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -76,3 +79,4 @@ public class ClientRestController {
         return ResponseEntity.ok(clients);
     }
 }
+//> bean proporties
