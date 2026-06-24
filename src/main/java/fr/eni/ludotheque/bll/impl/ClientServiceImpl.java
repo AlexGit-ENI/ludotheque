@@ -43,12 +43,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client updateAdresse(int noClient, Adresse adresse) {
+    public Client updateAdresse(int noClient, String adresse) {
 
         Client client = clientRepository.findById(noClient)
                 .orElseThrow(() -> new RuntimeException("Client non trouvé"));
 
-        client.setAdresse(adresse);
+        client.setAdresse(new Adresse());
 
         return clientRepository.save(client);
     }
